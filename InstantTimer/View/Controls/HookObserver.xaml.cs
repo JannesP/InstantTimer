@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InstantTimer.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace InstantTimer
+namespace InstantTimer.View.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for HookObserver.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class HookObserver : UserControl
     {
-        public MainWindow()
+        public HookObserver()
         {
             InitializeComponent();
+            this.DataContext = new HookProcViewModel();
         }
     }
 }
