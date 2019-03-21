@@ -70,6 +70,10 @@
     </Compile>
     <Compile Include="Model\HookManager.cs" />
     <Compile Include="NativeImports\NativeHook.cs" />
+    <Compile Include="Settings\ISettingsProvider.cs" />
+    <Compile Include="Settings\SettingsData.cs" />
+    <Compile Include="Settings\XmlFileSettingsProvider.cs" />
+    <Compile Include="Utility\Injector.cs" />
     <Compile Include="Utility\NativeHookWrapper.cs" />
     <Compile Include="Utility\WpfUtil.cs" />
     <Compile Include="ViewModel\HookProcViewModel.cs" />

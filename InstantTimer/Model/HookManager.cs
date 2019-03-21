@@ -1,4 +1,5 @@
 ﻿using InstantTimer.NativeImports;
+using InstantTimer.Settings;
 using InstantTimer.Utility;
 using System;
 using System.Collections.Generic;
@@ -60,11 +61,10 @@ namespace InstantTimer.Model
         }
 
 
-        public static void InitInstance(IEnumerable<Key> mods = null)
+        public static void InitInstance()
         {
-            if (mods == null) mods = new List<Key> { Key.RightCtrl, Key.RightShift, Key.L };
             if (Instance != null) throw new InvalidOperationException("There is already an instance of HookManager active.");
-            Instance = new HookManager(mods);
+            Instance = new HookManager();
         }
 
         public static void DisposeInstance()
@@ -73,11 +73,25 @@ namespace InstantTimer.Model
             Instance = null;
         }
 
-        private HookManager(IEnumerable<Key> mods = null)
+        private HookManager()
         {
-            Modifiers = mods;
+            ISettingsProvider settings = Injector.Get<ISettingsProvider>();
+            settings.Settings.PropertyChanged += Settings_PropertyChanged;
+            Modifiers = settings.Settings.InstantTimerModifierKeys;
             NativeHookWrapper.KeyboardHookCalled += NativeHookWrapper_KeyboardHookCalled;
             NativeHookWrapper.ActivateKeyboardHook();
+        }
+
+        private void Settings_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            SettingsData s = sender as SettingsData;
+            if (s == null) throw new Exception("Expected a correct sender.");
+            switch(e.PropertyName)
+            {
+                case nameof(SettingsData.InstantTimerModifierKeys):
+                    Modifiers = s.InstantTimerModifierKeys;
+                    break;
+            }
         }
 
         private void NativeHookWrapper_KeyboardHookCalled(object sender, KeyboardHookEventArgs e)

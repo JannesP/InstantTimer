@@ -1,4 +1,6 @@
 ﻿using InstantTimer.Model;
+using InstantTimer.Settings;
+using InstantTimer.Utility;
 using JJA.Anperi.WpfUtility;
 using Microsoft.VisualBasic.Logging;
 using System;
@@ -44,7 +46,10 @@ namespace InstantTimer
                 //ignored
             }
             WpfUtil.SecondInstanceStarted += WpfUtil_SecondInstanceStarted;
+
+            SetupDi();
             HookManager.InitInstance();
+            Injector.Get<ISettingsProvider>().Load();
 
             this.ShowCreateMainWindow<MainWindow>(out bool _);
 
@@ -90,8 +95,15 @@ namespace InstantTimer
         protected override void OnExit(ExitEventArgs e)
         {
             Trace.TraceInformation("OnExit called.");
+            Injector.Get<ISettingsProvider>().Save();
             HookManager.DisposeInstance();
+            Injector.DisposeContent();
             base.OnExit(e);
+        }
+
+        private void SetupDi()
+        {
+            Injector.Put<ISettingsProvider>(new XmlFileSettingsProvider());
         }
     }
 }
