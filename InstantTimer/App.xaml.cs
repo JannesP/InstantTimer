@@ -1,7 +1,6 @@
 ﻿using InstantTimer.Model;
 using InstantTimer.Settings;
 using InstantTimer.Utility;
-using JJA.Anperi.WpfUtility;
 using Microsoft.VisualBasic.Logging;
 using System;
 using System.Collections.Generic;
@@ -51,14 +50,14 @@ namespace InstantTimer
             HookManager.InitInstance();
             Injector.Get<ISettingsProvider>().Load();
 
-            this.ShowCreateMainWindow<MainWindow>(out bool _);
+            this.ShowCreateMainWindow<MainWindow>();
 
             base.OnStartup(e);
         }
 
         private void WpfUtil_SecondInstanceStarted(object sender, EventArgs e)
         {
-            this.ShowCreateMainWindow<MainWindow>(out bool _);
+            this.ShowCreateMainWindow<MainWindow>();
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

@@ -73,6 +73,14 @@ namespace InstantTimer.Model
             Instance = null;
         }
 
+        public bool AllModifiersActive
+        {
+            get
+            {
+                return ModifierStates.All(kvp => kvp.Value);
+            }
+        }
+
         private HookManager()
         {
             ISettingsProvider settings = Injector.Get<ISettingsProvider>();

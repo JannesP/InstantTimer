@@ -76,7 +76,7 @@
     <Compile Include="Utility\Injector.cs" />
     <Compile Include="Utility\NativeHookWrapper.cs" />
     <Compile Include="Utility\WpfUtil.cs" />
-    <Compile Include="ViewModel\HookProcViewModel.cs" />
+    <Compile Include="ViewModel\HookObserverViewModel.cs" />
     <Compile Include="View\Controls\HookObserver.xaml.cs">
       <DependentUpon>HookObserver.xaml</DependentUpon>
     </Compile>

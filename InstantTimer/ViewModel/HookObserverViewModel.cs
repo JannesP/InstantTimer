@@ -10,9 +10,9 @@ using System.Windows.Input;
 
 namespace InstantTimer.ViewModel
 {
-    public class HookProcViewModel : INotifyPropertyChanged
+    public class HookObserverViewModel : INotifyPropertyChanged, IDisposable
     {
-        public HookProcViewModel()
+        public HookObserverViewModel()
         {
             if (HookManager.Instance != null)
             {
@@ -45,6 +45,31 @@ namespace InstantTimer.ViewModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+        #region IDisposable Support
+        private bool disposedValue = false; // To detect redundant calls
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                if (disposing)
+                {
+                    HookManager.Instance.ModifiersChanged -= Instance_ModifiersChanged;
+                    HookManager.Instance.ModifierStateChanged -= Instance_ModifierStateChanged;
+                    HookManager.Instance.KeyEvent -= Instance_KeyEvent;
+                }
+                disposedValue = true;
+            }
+        }
+        public void Dispose()
+        {
+            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+            Dispose(true);
+            // TODO: uncomment the following line if the finalizer is overridden above.
+            // GC.SuppressFinalize(this);
+        }
+        #endregion
 
     }
 }

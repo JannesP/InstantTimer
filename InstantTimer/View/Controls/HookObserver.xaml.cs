@@ -21,10 +21,24 @@ namespace InstantTimer.View.Controls
     /// </summary>
     public partial class HookObserver : UserControl
     {
+        private HookObserverViewModel _vm;
+
         public HookObserver()
         {
             InitializeComponent();
-            this.DataContext = new HookProcViewModel();
+        }
+
+        private void UserControl_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _vm?.Dispose();
+            _vm = null;
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (_vm != null) _vm.Dispose();
+            _vm = new HookObserverViewModel();
+            this.DataContext = _vm;
         }
     }
 }

@@ -7,8 +7,8 @@
         xmlns:vm="clr-namespace:InstantTimer.ViewModel"
         xmlns:controls="clr-namespace:InstantTimer.View.Controls"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance Type=vm:HookProcViewModel, IsDesignTimeCreatable=False}"
-        Title="MainWindow" Width="511.776" Height="208.061">
+        d:DataContext="{d:DesignInstance Type=vm:HookObserverViewModel, IsDesignTimeCreatable=False}"
+        Title="MainWindow" Width="431.776" Height="202.061">
     <Grid>
         <controls:HookObserver/>
     </Grid>

@@ -10,7 +10,7 @@ using System.Windows.Input;
 using Microsoft.Win32;
 using Application = System.Windows.Application;
 
-namespace JJA.Anperi.WpfUtility
+namespace InstantTimer.Utility
 {
     public static class WpfUtil
     {
